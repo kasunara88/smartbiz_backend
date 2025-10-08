@@ -11,14 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable()
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/api/v1/smartbiz/auth/register", "/api/v1/smartbiz/auth/login").permitAll()
-//                        .anyRequest().authenticated()
-//                );
-//        return http.build();
-//    }
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // 1. Disable CSRF (Cross-Site Request Forgery) protection, common for stateless APIs.
@@ -26,9 +18,7 @@ public class SecurityConfig {
 
                 // 2. Configure authorization rules
                 .authorizeHttpRequests(auth -> auth
-                        // Allow all requests to the authentication endpoints (login, register)
-                        .requestMatchers("/api/v1/smartbiz/auth/**").permitAll()
-                        // Require authentication for all other requests
+                        .requestMatchers("/api/v1/smartbiz/auth/**", "/api/v1/smartbiz/customers/**" ).permitAll()
                         .anyRequest().authenticated()
                 )
 
